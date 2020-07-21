@@ -1,6 +1,3 @@
-require 'pry'
-require 'respec'
-
 class Game
   attr_accessor :human_player, :players_left, :enemies, :round
 
