@@ -12,9 +12,7 @@ def perform
   print 'Saisie ton nom ici > '
   user_name = gets.chomp
   user = HumanPlayer.new(user_name)
-  player1 = [Player.new('José')
-  player2 = Player.new('Josianne')
-
+  players = [Player.new('José'), Player.new('Josianne')]
 
   round = 0 #les tours commence de 0
 
@@ -34,7 +32,6 @@ def perform
     puts '| Attaquer :'
     players.each_with_index {|player, index| puts "|> #{index} - #{player.get_state}"}
     puts '============================================================================'
-
 
     #Choix réponse menu
     print 'Quel est ton choix > '
