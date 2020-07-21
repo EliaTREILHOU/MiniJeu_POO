@@ -9,11 +9,12 @@ def perform
   puts "| Le but du jeu est d'être le dernier survivant ! |"
   puts '+-------------------------------------------------+'
 
-
   print 'Saisie ton nom ici > '
   user_name = gets.chomp
   user = HumanPlayer.new(user_name)
-  players = [Player.new('José'), Player.new('Josianne')]
+  player1 = [Player.new('José')
+  player2 = Player.new('Josianne')
+
 
   round = 0 #les tours commence de 0
 
@@ -50,7 +51,7 @@ def perform
     puts 'Appuie sur entrée pour continuer'
     gets
   end
-puts perform
+perform
 
 #Fin du Jeu
   puts 'La partie est finie'
@@ -60,4 +61,3 @@ puts perform
     puts 'Dommage ! Tu as perdu !'
   end
 end
-binding.pry
