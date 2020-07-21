@@ -1,6 +1,3 @@
-require 'pry'
-require 'respec'
-
 class Player
   attr_accessor :name, :life_points
 
