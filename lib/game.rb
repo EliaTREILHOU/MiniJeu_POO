@@ -1,12 +1,12 @@
-class Game
+class Game #classe du jeu
   attr_accessor :human_player, :players_left, :enemies, :round
 
 # human_name  = Nom du joueur humain
 # nb_enemies = Nombre total d'ennemis
 
   def initialize(human_name, nb_ennemies = 10)
-    @human_player = HumanPlayer.new(human_name)
-    @players_left = nb_ennemies.times.map { |n| Player.new("bot_#{n}") }
+    @human_player = HumanPlayer.new(human_name) 
+    @players_out = nb_ennemies.times.map { |d| Player.new("bot_#{d}")} 
     @enemies_in_sight = []
     @round = 1
   end
@@ -21,13 +21,13 @@ class Game
 #Si joueur humain et au moins un bot sont en vie je continue le jeu !
 
   def is_still_ongoing?
-    @human_player.alive? && (!@enemies.empty? || !@players_left.empty?)
+    @human_player.alive? && (!@enemies.empty? || !@players_out.empty?)
   end
 
 
   # Check si un ennemi est en attente sinon continue !
   def new_players_in_sight
-    if @players_left.empty?
+    if @players_out.empty?
       puts "Pas d'autre ennemi en attente"
       return
     end
@@ -35,22 +35,22 @@ class Game
     dés = rand(1..6) #choix entre les face du dés entre 1 et 6
     if dés == 1
       puts 'Génial ! Pas de nouvel ennemi en vu!'
-    elsif dès <= 4 || @players_left.size == 1
-      @enemies << @players_left.pop
+    elsif dès <= 4 || @players_out.size == 1
+      @enemies << @players_out.pop
       puts 'Attention ! Un nouvel ennemi apparait !'
-    else # Le dés tombe sur 5 ou 6
-      @enemies << @players_left.pop
-      @enemies << @players_left.pop
-      puts 'Anttion ! Deux nouveaux ennemis vont apparaitre !'
+    else 
+      @enemies << @players_out.pop
+      @enemies << @players_out.pop
+      puts 'Attention ! Deux nouveaux ennemis vont apparaitre sous peu !'
     end
     puts
   end
 
-  # Afficher l'état du joueur humain et le résumé des bots.
+  # Affiche l'état du joueur humain et l'état des bots.
   def show_players
     puts '+-Etat--------------------------------------------------------------------------'
     puts '| ' + @human_player.get_state
-    puts "| Il y a #{@enemies.size} ennemis en approche, et #{@players_left.size} en attente"
+    puts "| Il y a #{@enemies.size} ennemis en approche, et #{@players_out.size} en attente"
     puts '+--------------------------------------------------------------------------------------'
   end
 
@@ -89,10 +89,11 @@ class Game
     puts '-'
   end
 
+  #Fin de la partie
   def end
     puts 'Fin de la Partie'
     if @human_player.alive?
-      puts 'BRAVO ! Tu as Gagné !!'
+      puts 'BRAVO ! Tu as Gagné la game !!'
     else
       puts 'Dommage ! Tu as perdu la partie !'
     end
